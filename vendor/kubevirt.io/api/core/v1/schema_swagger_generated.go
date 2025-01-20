@@ -93,7 +93,6 @@ func (DomainSpec) SwaggerDoc() map[string]string {
 		"features":        "Features like acpi, apic, hyperv, smm.\n+optional",
 		"devices":         "Devices allows adding disks, network interfaces, and others",
 		"ioThreadsPolicy": "Controls whether or not disks will share IOThreads.\nOmitting IOThreadsPolicy disables use of IOThreads.\nOne of: shared, auto\n+optional",
-		"ioThreads":       "IOThreads specifies the IOThreads options.\n+optional",
 		"chassis":         "Chassis specifies the chassis info passed to the domain.\n+optional",
 		"launchSecurity":  "Launch Security setting of the vmi.\n+optional",
 	}
@@ -463,7 +462,7 @@ func (HotplugVolumeSource) SwaggerDoc() map[string]string {
 
 func (DataVolumeSource) SwaggerDoc() map[string]string {
 	return map[string]string{
-		"name":         "Name of both the DataVolume and the PVC in the same namespace.",
+		"name":         "Name of both the DataVolume and the PVC in the same namespace.\nAfter PVC population the DataVolume is garbage collected by default.",
 		"hotpluggable": "Hotpluggable indicates whether the volume can be hotplugged and hotunplugged.\n+optional",
 	}
 }
@@ -887,11 +886,5 @@ func (CPUTopology) SwaggerDoc() map[string]string {
 		"cores":   "Cores specifies the number of cores inside the vmi.\nMust be a value greater or equal 1.",
 		"sockets": "Sockets specifies the number of sockets inside the vmi.\nMust be a value greater or equal 1.",
 		"threads": "Threads specifies the number of threads inside the vmi.\nMust be a value greater or equal 1.",
-	}
-}
-
-func (DiskIOThreads) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"supplementalPoolThreadCount": "SupplementalPoolThreadCount specifies how many iothreads are allocated for the supplementalPool policy.\n+optional",
 	}
 }
