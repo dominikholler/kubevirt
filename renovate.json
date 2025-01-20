@@ -1,0 +1,34 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "baseBranches": [
+      "main",
+      "release-1.4",
+      "release-1.3",
+      "release-1.2",
+      "release-1.1",
+      "release-1.0",
+      "release-0.58"
+  ],
+  "postUpdateOptions": ["gomodTidy"],
+  "labels": ["release-note-none"],
+  "extends": [":gitSignOff"],
+  "enabledManagers": ["gomod"],
+  "excludeCommitPaths": [
+      "vendor/github.com/golang/glog/**",
+      "vendor/kubevirt.io/api/**",
+      "vendor/kubevirt.io/client-go/**"
+  ],
+  "packageRules": [
+    {
+      "enabled": false,
+      "matchPackagePatterns": ["*"]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "osvVulnerabilityAlerts": true,
+  "assigneesFromCodeOwners": true
+}
