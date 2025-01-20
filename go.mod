@@ -59,7 +59,7 @@ require (
 	github.com/vishvananda/netlink v1.1.1-0.20201029203352-d40f9887b852
 	github.com/wadey/gocovmerge v0.0.0-20160331181800-b5bfa59ec0ad
 	golang.org/x/crypto v0.14.0
-	golang.org/x/net v0.17.0
+	golang.org/x/net v0.33.0
 	golang.org/x/sys v0.13.0
 	golang.org/x/term v0.13.0
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac
