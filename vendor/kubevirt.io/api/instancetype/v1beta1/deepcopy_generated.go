@@ -295,13 +295,13 @@ func (in *FirmwarePreferences) DeepCopyInto(out *FirmwarePreferences) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DeprecatedPreferredUseEfi != nil {
-		in, out := &in.DeprecatedPreferredUseEfi, &out.DeprecatedPreferredUseEfi
+	if in.PreferredUseEfi != nil {
+		in, out := &in.PreferredUseEfi, &out.PreferredUseEfi
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DeprecatedPreferredUseSecureBoot != nil {
-		in, out := &in.DeprecatedPreferredUseSecureBoot, &out.DeprecatedPreferredUseSecureBoot
+	if in.PreferredUseSecureBoot != nil {
+		in, out := &in.PreferredUseSecureBoot, &out.PreferredUseSecureBoot
 		*out = new(bool)
 		**out = **in
 	}

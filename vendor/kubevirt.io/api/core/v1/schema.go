@@ -30,12 +30,11 @@ import (
 type IOThreadsPolicy string
 
 const (
-	IOThreadsPolicyShared           IOThreadsPolicy = "shared"
-	IOThreadsPolicyAuto             IOThreadsPolicy = "auto"
-	IOThreadsPolicySupplementalPool IOThreadsPolicy = "supplementalPool"
-	CPUModeHostPassthrough                          = "host-passthrough"
-	CPUModeHostModel                                = "host-model"
-	DefaultCPUModel                                 = CPUModeHostModel
+	IOThreadsPolicyShared  IOThreadsPolicy = "shared"
+	IOThreadsPolicyAuto    IOThreadsPolicy = "auto"
+	CPUModeHostPassthrough                 = "host-passthrough"
+	CPUModeHostModel                       = "host-model"
+	DefaultCPUModel                        = CPUModeHostModel
 )
 
 const HotplugDiskDir = "/var/run/kubevirt/hotplug-disks/"
@@ -204,9 +203,6 @@ type DomainSpec struct {
 	// One of: shared, auto
 	// +optional
 	IOThreadsPolicy *IOThreadsPolicy `json:"ioThreadsPolicy,omitempty"`
-	// IOThreads specifies the IOThreads options.
-	// +optional
-	IOThreads *DiskIOThreads `json:"ioThreads,omitempty"`
 	// Chassis specifies the chassis info passed to the domain.
 	// +optional
 	Chassis *Chassis `json:"chassis,omitempty"`
@@ -862,6 +858,7 @@ type HotplugVolumeSource struct {
 
 type DataVolumeSource struct {
 	// Name of both the DataVolume and the PVC in the same namespace.
+	// After PVC population the DataVolume is garbage collected by default.
 	Name string `json:"name"`
 	// Hotpluggable indicates whether the volume can be hotplugged and hotunplugged.
 	// +optional
@@ -1244,7 +1241,7 @@ type Interface struct {
 	// Must match the Name of a Network.
 	Name string `json:"name"`
 	// Interface model.
-	// One of: e1000, e1000e, igb, ne2k_pci, pcnet, rtl8139, virtio.
+	// One of: e1000, e1000e, ne2k_pci, pcnet, rtl8139, virtio.
 	// Defaults to virtio.
 	// TODO:(ihar) switch to enums once opengen-api supports them. See: https://github.com/kubernetes/kube-openapi/issues/51
 	Model string `json:"model,omitempty"`
@@ -1588,10 +1585,4 @@ type CPUTopology struct {
 	// Threads specifies the number of threads inside the vmi.
 	// Must be a value greater or equal 1.
 	Threads uint32 `json:"threads,omitempty"`
-}
-
-type DiskIOThreads struct {
-	// SupplementalPoolThreadCount specifies how many iothreads are allocated for the supplementalPool policy.
-	// +optional
-	SupplementalPoolThreadCount *uint32 `json:"supplementalPoolThreadCount,omitempty"`
 }
