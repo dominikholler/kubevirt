@@ -30,12 +30,11 @@ import (
 type IOThreadsPolicy string
 
 const (
-	IOThreadsPolicyShared           IOThreadsPolicy = "shared"
-	IOThreadsPolicyAuto             IOThreadsPolicy = "auto"
-	IOThreadsPolicySupplementalPool IOThreadsPolicy = "supplementalPool"
-	CPUModeHostPassthrough                          = "host-passthrough"
-	CPUModeHostModel                                = "host-model"
-	DefaultCPUModel                                 = CPUModeHostModel
+	IOThreadsPolicyShared  IOThreadsPolicy = "shared"
+	IOThreadsPolicyAuto    IOThreadsPolicy = "auto"
+	CPUModeHostPassthrough                 = "host-passthrough"
+	CPUModeHostModel                       = "host-model"
+	DefaultCPUModel                        = CPUModeHostModel
 )
 
 const HotplugDiskDir = "/var/run/kubevirt/hotplug-disks/"
@@ -204,9 +203,6 @@ type DomainSpec struct {
 	// One of: shared, auto
 	// +optional
 	IOThreadsPolicy *IOThreadsPolicy `json:"ioThreadsPolicy,omitempty"`
-	// IOThreads specifies the IOThreads options.
-	// +optional
-	IOThreads *DiskIOThreads `json:"ioThreads,omitempty"`
 	// Chassis specifies the chassis info passed to the domain.
 	// +optional
 	Chassis *Chassis `json:"chassis,omitempty"`
@@ -450,12 +446,10 @@ type Devices struct {
 	// DisableHotplug disabled the ability to hotplug disks.
 	DisableHotplug bool `json:"disableHotplug,omitempty"`
 	// Disks describes disks, cdroms and luns which are connected to the vmi.
-	// +kubebuilder:validation:MaxItems:=256
 	Disks []Disk `json:"disks,omitempty"`
 	// Watchdog describes a watchdog device which can be added to the vmi.
 	Watchdog *Watchdog `json:"watchdog,omitempty"`
 	// Interfaces describe network interfaces which are added to the vmi.
-	// +kubebuilder:validation:MaxItems:=256
 	Interfaces []Interface `json:"interfaces,omitempty"`
 	// Inputs describe input devices
 	Inputs []Input `json:"inputs,omitempty"`
@@ -862,6 +856,7 @@ type HotplugVolumeSource struct {
 
 type DataVolumeSource struct {
 	// Name of both the DataVolume and the PVC in the same namespace.
+	// After PVC population the DataVolume is garbage collected by default.
 	Name string `json:"name"`
 	// Hotpluggable indicates whether the volume can be hotplugged and hotunplugged.
 	// +optional
@@ -1057,11 +1052,6 @@ type HypervTimer struct {
 	Enabled *bool `json:"present,omitempty"`
 }
 
-type HyperVPassthrough struct {
-	// +optional
-	Enabled *bool `json:"enabled,omitempty"`
-}
-
 type Features struct {
 	// ACPI enables/disables ACPI inside the guest.
 	// Defaults to enabled.
@@ -1070,12 +1060,6 @@ type Features struct {
 	// Defaults to the machine type setting.
 	// +optional
 	APIC *FeatureAPIC `json:"apic,omitempty"`
-	// This enables all supported hyperv flags automatically.
-	// Bear in mind that if this enabled hyperV features cannot
-	// be enabled explicitly. In addition, a Virtual Machine
-	// using it will be non-migratable.
-	// +optional
-	HypervPassthrough *HyperVPassthrough `json:"hypervPassthrough,omitempty"`
 	// Defaults to the machine type setting.
 	// +optional
 	Hyperv *FeatureHyperv `json:"hyperv,omitempty"`
@@ -1244,7 +1228,7 @@ type Interface struct {
 	// Must match the Name of a Network.
 	Name string `json:"name"`
 	// Interface model.
-	// One of: e1000, e1000e, igb, ne2k_pci, pcnet, rtl8139, virtio.
+	// One of: e1000, e1000e, ne2k_pci, pcnet, rtl8139, virtio.
 	// Defaults to virtio.
 	// TODO:(ihar) switch to enums once opengen-api supports them. See: https://github.com/kubernetes/kube-openapi/issues/51
 	Model string `json:"model,omitempty"`
@@ -1338,31 +1322,23 @@ type DHCPPrivateOptions struct {
 // Represents the method which will be used to connect the interface to the guest.
 // Only one of its members may be specified.
 type InterfaceBindingMethod struct {
-	Bridge *InterfaceBridge `json:"bridge,omitempty"`
-	// DeprecatedSlirp is an alias to the deprecated Slirp interface
-	// Deprecated: Removed in v1.3
-	DeprecatedSlirp *DeprecatedInterfaceSlirp `json:"slirp,omitempty"`
-	Masquerade      *InterfaceMasquerade      `json:"masquerade,omitempty"`
-	SRIOV           *InterfaceSRIOV           `json:"sriov,omitempty"`
-	// DeprecatedMacvtap is an alias to the deprecated Macvtap interface,
-	// please refer to Kubevirt user guide for alternatives.
-	// Deprecated: Removed in v1.3
+	Bridge     *InterfaceBridge     `json:"bridge,omitempty"`
+	Slirp      *InterfaceSlirp      `json:"slirp,omitempty"`
+	Masquerade *InterfaceMasquerade `json:"masquerade,omitempty"`
+	SRIOV      *InterfaceSRIOV      `json:"sriov,omitempty"`
+	// Deprecated, please refer to Kubevirt user guide for alternatives.
 	// +optional
-	DeprecatedMacvtap *DeprecatedInterfaceMacvtap `json:"macvtap,omitempty"`
-	// DeprecatedPasst is an alias to the deprecated Passt interface,
-	// please refer to Kubevirt user guide for alternatives.
-	// Deprecated: Removed in v1.3
+	Macvtap *InterfaceMacvtap `json:"macvtap,omitempty"`
+	// Deprecated, please refer to Kubevirt user guide for alternatives.
 	// +optional
-	DeprecatedPasst *DeprecatedInterfacePasst `json:"passt,omitempty"`
+	Passt *InterfacePasst `json:"passt,omitempty"`
 }
 
 // InterfaceBridge connects to a given network via a linux bridge.
 type InterfaceBridge struct{}
 
-// DeprecatedInterfaceSlirp is an alias to the deprecated InterfaceSlirp
-// that connects to a given network using QEMU user networking mode.
-// Deprecated: Removed in v1.3
-type DeprecatedInterfaceSlirp struct{}
+// InterfaceSlirp connects to a given network using QEMU user networking mode.
+type InterfaceSlirp struct{}
 
 // InterfaceMasquerade connects to a given network using netfilter rules to nat the traffic.
 type InterfaceMasquerade struct{}
@@ -1370,14 +1346,11 @@ type InterfaceMasquerade struct{}
 // InterfaceSRIOV connects to a given network by passing-through an SR-IOV PCI device via vfio.
 type InterfaceSRIOV struct{}
 
-// DeprecatedInterfaceMacvtap is an alias to the deprecated InterfaceMacvtap
-// that connects to a given network by extending the Kubernetes node's L2 networks via a macvtap interface.
-// Deprecated: Removed in v1.3
-type DeprecatedInterfaceMacvtap struct{}
+// InterfaceMacvtap connects to a given network by extending the Kubernetes node's L2 networks via a macvtap interface.
+type InterfaceMacvtap struct{}
 
-// DeprecatedInterfacePasst is an alias to the deprecated InterfacePasst
-// Deprecated: Removed in v1.3
-type DeprecatedInterfacePasst struct{}
+// InterfacePasst connects to a given network.
+type InterfacePasst struct{}
 
 // PluginBinding represents a binding implemented in a plugin.
 type PluginBinding struct {
@@ -1588,10 +1561,4 @@ type CPUTopology struct {
 	// Threads specifies the number of threads inside the vmi.
 	// Must be a value greater or equal 1.
 	Threads uint32 `json:"threads,omitempty"`
-}
-
-type DiskIOThreads struct {
-	// SupplementalPoolThreadCount specifies how many iothreads are allocated for the supplementalPool policy.
-	// +optional
-	SupplementalPoolThreadCount *uint32 `json:"supplementalPoolThreadCount,omitempty"`
 }
