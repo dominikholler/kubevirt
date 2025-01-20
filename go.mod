@@ -161,7 +161,7 @@ require (
 )
 
 require (
-	github.com/containers/common v0.50.1
+	github.com/containers/common v0.60.4
 	github.com/google/goterm v0.0.0-20190311235235-ce302be1d114 // indirect; indirect github.com/gophercloud/gophercloud v0.4.0 // indirect
 )
 
