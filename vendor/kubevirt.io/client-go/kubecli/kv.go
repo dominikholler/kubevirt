@@ -27,10 +27,10 @@ import (
 	"k8s.io/client-go/rest"
 
 	v1 "kubevirt.io/api/core/v1"
-	kvcorev1 "kubevirt.io/client-go/kubevirt/typed/core/v1"
+	kvcorev1 "kubevirt.io/client-go/generated/kubevirt/clientset/versioned/typed/core/v1"
 )
 
-func (k *kubevirtClient) KubeVirt(namespace string) KubeVirtInterface {
+func (k *kubevirt) KubeVirt(namespace string) KubeVirtInterface {
 	return &kv{
 		KubeVirtInterface: k.GeneratedKubeVirtClient().KubevirtV1().KubeVirts(namespace),
 		restClient:        k.restClient,
@@ -83,6 +83,10 @@ func (o *kv) List(ctx context.Context, options k8smetav1.ListOptions) (*v1.KubeV
 
 func (o *kv) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, patchOptions k8smetav1.PatchOptions, subresources ...string) (result *v1.KubeVirt, err error) {
 	return o.KubeVirtInterface.Patch(ctx, name, pt, data, patchOptions, subresources...)
+}
+
+func (o *kv) PatchStatus(ctx context.Context, name string, pt types.PatchType, data []byte, patchOptions k8smetav1.PatchOptions) (result *v1.KubeVirt, err error) {
+	return o.Patch(ctx, name, pt, data, patchOptions, "status")
 }
 
 func (o *kv) UpdateStatus(ctx context.Context, kv *v1.KubeVirt, opts k8smetav1.UpdateOptions) (result *v1.KubeVirt, err error) {
