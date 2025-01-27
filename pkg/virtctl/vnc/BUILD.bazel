@@ -9,8 +9,8 @@ go_library(
         "//pkg/virtctl/clientconfig:go_default_library",
         "//pkg/virtctl/templates:go_default_library",
         "//pkg/virtctl/vnc/screenshot:go_default_library",
-        "//staging/src/kubevirt.io/client-go/kubevirt/typed/core/v1:go_default_library",
-        "//staging/src/kubevirt.io/client-go/log:go_default_library",
         "//vendor/github.com/spf13/cobra:go_default_library",
+        "//vendor/kubevirt.io/client-go/kubevirt/typed/core/v1:go_default_library",
+        "//vendor/kubevirt.io/client-go/log:go_default_library",
     ],
 )
