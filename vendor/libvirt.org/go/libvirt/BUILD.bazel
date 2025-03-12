@@ -95,7 +95,6 @@ go_library(
         "stream_helper.h",
         "typedparams.go",
     ],
-    cdeps = ["//:libvirt-libs"],
     cgo = True,
     importmap = "kubevirt.io/kubevirt/vendor/libvirt.org/go/libvirt",
     importpath = "libvirt.org/go/libvirt",
