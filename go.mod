@@ -1,6 +1,8 @@
 module kubevirt.io/kubevirt
 
-go 1.22.0
+go 1.23.0
+
+toolchain go1.23.7
 
 require (
 	github.com/cheggaaa/pb/v3 v3.1.0
@@ -56,11 +58,11 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/vishvananda/netlink v1.3.0
 	github.com/wadey/gocovmerge v0.0.0-20160331181800-b5bfa59ec0ad
-	golang.org/x/crypto v0.31.0
-	golang.org/x/net v0.33.0
-	golang.org/x/sync v0.10.0
-	golang.org/x/sys v0.28.0
-	golang.org/x/term v0.27.0
+	golang.org/x/crypto v0.35.0
+	golang.org/x/net v0.36.0
+	golang.org/x/sync v0.11.0
+	golang.org/x/sys v0.30.0
+	golang.org/x/term v0.29.0
 	golang.org/x/time v0.5.0
 	golang.org/x/tools v0.24.0
 	google.golang.org/grpc v1.65.0
@@ -146,7 +148,7 @@ require (
 	golang.org/x/exp/typeparams v0.0.0-20230203172020-98cc5a0785f9 // indirect
 	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240701130421-f6361c86f094 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
