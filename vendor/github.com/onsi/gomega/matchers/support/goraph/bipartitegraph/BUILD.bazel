@@ -13,5 +13,6 @@ go_library(
         "//vendor/github.com/onsi/gomega/matchers/support/goraph/edge:go_default_library",
         "//vendor/github.com/onsi/gomega/matchers/support/goraph/node:go_default_library",
         "//vendor/github.com/onsi/gomega/matchers/support/goraph/util:go_default_library",
+        "//vendor/golang.org/x/exp/slices:go_default_library",
     ],
 )
