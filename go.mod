@@ -41,7 +41,7 @@ require (
 	github.com/nunnatsa/ginkgolinter v0.4.1
 	github.com/onsi/ginkgo/v2 v2.1.3
 	github.com/onsi/gomega v1.18.1
-	github.com/opencontainers/runc v1.1.12
+	github.com/opencontainers/runc v1.1.14
 	github.com/opencontainers/selinux v1.10.0
 	github.com/openshift/api v0.0.0
 	github.com/openshift/client-go v0.0.0
@@ -58,10 +58,10 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/vishvananda/netlink v1.1.1-0.20201029203352-d40f9887b852
 	github.com/wadey/gocovmerge v0.0.0-20160331181800-b5bfa59ec0ad
-	golang.org/x/crypto v0.14.0
-	golang.org/x/net v0.17.0
-	golang.org/x/sys v0.13.0
-	golang.org/x/term v0.13.0
+	golang.org/x/crypto v0.22.0
+	golang.org/x/net v0.24.0
+	golang.org/x/sys v0.19.0
+	golang.org/x/term v0.19.0
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac
 	golang.org/x/tools v0.6.0
 	google.golang.org/grpc v1.56.3
@@ -149,10 +149,10 @@ require (
 	go.mongodb.org/mongo-driver v1.8.4 // indirect
 	golang.org/x/mod v0.8.0 // indirect
 	golang.org/x/oauth2 v0.7.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
-	google.golang.org/protobuf v1.30.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	mvdan.cc/editorconfig v0.1.1-0.20200121172147-e40951bde157 // indirect
