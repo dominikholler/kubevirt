@@ -6,7 +6,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
 	k8s.io/api v0.17.3
-	k8s.io/apimachinery v0.17.3
+	k8s.io/apimachinery v0.17.9
 	k8s.io/client-go v11.0.0+incompatible
 	k8s.io/utils v0.0.0-20200124190032-861946025e34 // indirect
 )
@@ -16,7 +16,7 @@ replace (
 	k8s.io/api => k8s.io/api v0.17.0
 	k8s.io/api/admissionregistration => k8s.io/api/admissionregistration v0.17.0
 	k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.17.0
-	k8s.io/apimachinery => k8s.io/apimachinery v0.17.0
+	k8s.io/apimachinery => k8s.io/apimachinery v0.17.9
 	k8s.io/apiserver => k8s.io/apiserver v0.17.0
 	k8s.io/cli-runtime => k8s.io/cli-runtime v0.17.0
 	k8s.io/client-go => k8s.io/client-go v0.17.0
