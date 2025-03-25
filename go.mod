@@ -88,8 +88,7 @@ require (
 )
 
 require (
-	cloud.google.com/go/compute v1.19.1 // indirect
-	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/Azure/go-autorest v14.2.0+incompatible // indirect
 	github.com/Azure/go-autorest/autorest v0.11.18 // indirect
 	github.com/Azure/go-autorest/autorest/adal v0.9.13 // indirect
@@ -148,9 +147,8 @@ require (
 	github.com/willf/bitset v1.1.11 // indirect
 	go.mongodb.org/mongo-driver v1.8.4 // indirect
 	golang.org/x/mod v0.8.0 // indirect
-	golang.org/x/oauth2 v0.7.0 // indirect
+	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
-	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
@@ -211,4 +209,6 @@ replace (
 	sigs.k8s.io/controller-runtime => sigs.k8s.io/controller-runtime v0.6.2
 )
 
-go 1.17
+go 1.23.0
+
+toolchain go1.24.1
