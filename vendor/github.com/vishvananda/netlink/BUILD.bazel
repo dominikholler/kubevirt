@@ -36,6 +36,7 @@ go_library(
         "netns_linux.go",
         "netns_unspecified.go",
         "order.go",
+        "proc_event_linux.go",
         "protinfo.go",
         "protinfo_linux.go",
         "qdisc.go",
