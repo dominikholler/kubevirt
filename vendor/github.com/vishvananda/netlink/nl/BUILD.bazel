@@ -10,6 +10,7 @@ go_library(
         "genetlink_linux.go",
         "ipset_linux.go",
         "link_linux.go",
+        "lwt_linux.go",
         "mpls_linux.go",
         "nl_linux.go",
         "nl_unspecified.go",
